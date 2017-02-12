@@ -29,9 +29,9 @@ releaseCrossBuild := false
 
 publishTo := {
   if (isSnapshot.value) {
-    Try("snapshots" at sys.env("REPOSITORY_SNAPSHOTS")).toOption
+    scala.util.Try("snapshots" at sys.env("REPOSITORY_SNAPSHOTS")).toOption
   } else {
-    Try("releases"  at sys.env("REPOSITORY_RELEASES" )).toOption
+    scala.util.Try("releases"  at sys.env("REPOSITORY_RELEASES" )).toOption
   }
 }
 
