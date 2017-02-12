@@ -28,10 +28,11 @@ releasePublishArtifactsAction := PgpKeys.publishSigned.value
 releaseCrossBuild := false
 
 publishTo := {
-  if (isSnapshot.value)
-    Some("snapshots" at "https://oss.sonatype.org/content/repositories/snapshots")
-  else
-    Some("releases" at "https://oss.sonatype.org/service/local/staging/deploy/maven2")
+  if (isSnapshot.value) {
+    Try("snapshots" at sys.env("REPOSITORY_SNAPSHOTS")).toOption
+  } else {
+    Try("releases"  at sys.env("REPOSITORY_RELEASES" )).toOption
+  }
 }
 
 pomExtra := {
